@@ -4,7 +4,7 @@ El año pasado dí una [charla en el Codemotion sobre cómo desarrollar aplicaci
 
 Primero tienes que acceder a la [página de ponentes del Codemotion](https://madrid2018.codemotionworld.com/speakers/):
 
-![](./img/sombra/speakers)
+![](./img/sombra/speakers.png)
 
 Y luego tienes que acceder a la [página de un ponente del Codemotion](https://madrid2018.codemotionworld.com/speaker/4294/):
 
