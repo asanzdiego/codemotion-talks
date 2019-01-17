@@ -48,7 +48,7 @@ El proceso tarda un ratito y os saldrá algo así:
 
 Y al final del proceso obtendréis un bonito fichero [codemotion-talks.html](codemotion-talks.html) con toda la información relevante (nombre del ponente, nombre de la charla, resumen de la charla, idioma de la charla, nivel de la charla, y un enlace al vídeo de la misma):
 
-<a href="codemotion-talks.html">
+<a href="https://asanzdiego.github.io/codemotion-talks/codemotion-talks.html">
   <img src="./img/sombra/codemotion-talks.png" alt="Resultado"/>
 </a>
 
