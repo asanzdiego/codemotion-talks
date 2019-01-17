@@ -4,19 +4,23 @@ El año pasado dí una [charla en el Codemotion sobre cómo desarrollar aplicaci
 
 Primero tienes que acceder a la [página de ponentes del Codemotion](https://madrid2018.codemotionworld.com/speakers/):
 
-![](./img/sombra/speakers.png)
+<a href="https://madrid2018.codemotionworld.com/speakers/">
+  <img src="./img/sombra/speakers.png" alt="Página de ponentes del Codemotion"/>
+</a>
 
 Y luego tienes que acceder a la [página de un ponente del Codemotion](https://madrid2018.codemotionworld.com/speaker/4294/):
 
-![](./img/sombra/speaker.png)
+<a href="https://madrid2018.codemotionworld.com/speaker/4294/">
+  <img src="./img/sombra/speaker.png" alt="Página de un ponente del Codemotion"/>
+</a>
 
 Y luego tienes que hacer scroll para ver el título, el resumen y el vídeo de la charla que ha dado el ponente:
 
-![](./img/sombra/talk-login.png)
+![Página de un ponente abajo donde se ve el vídeo y las slides](./img/sombra/talk-login.png)
 
 Pero además, si no estás logueado, no te aparece la charla:
 
-![](./img/sombra/talk-no-login.png)
+![Página de un ponente abajo donde se ve un mensaje que te pide que te loguees si no lo estás](./img/sombra/talk-no-login.png)
 
 Así que me he entretenido haciendo un **script para juntar toda la información relevante de las charlas de Codemotion con un enlace a los vídeos en un solo fichero**. He utilizado [Puppeteer](https://pptr.dev/), que es una librería de NodeJS que proporciona una API de alto nivel para controlar Chrome y con la cual podemos hacer web scraping.
 
@@ -26,7 +30,7 @@ Para ejecutar el script tienes que, primero clonar este repositorio:
 git clone git@github.com:asanzdiego/codemotion-talks.git
 ~~~
 
-Luego [instalar NodeJS](https://nodejs.org/), y luego Puppeteer con el siguiente comando:
+Luego [instalar NodeJS](https://nodejs.org/), y luego **Puppeteer** con el siguiente comando:
 
 ~~~
 npm install puppeteer
@@ -40,10 +44,12 @@ node codemotion-talks.js YOUR_EMAIL YOUR_CODEMOTION_PASSWORD
 
 El proceso tarda un ratito y os saldrá algo así:
 
-![](./img/sombra/ejecucion.png)
+![Ejecución del proceso](./img/sombra/ejecucion.png)
 
-Y al final del proceso obtendréis un bonito fichero **codemotion-talks.html** con toda la información relevante (nombre del ponente, nombre de la charla, resumen de la charla, idioma de la charla, nivel de la charla, y un enlace al vídeo de la misma):
+Y al final del proceso obtendréis un bonito fichero [codemotion-talks.html](codemotion-talks.html) con toda la información relevante (nombre del ponente, nombre de la charla, resumen de la charla, idioma de la charla, nivel de la charla, y un enlace al vídeo de la misma):
 
-![](./img/sombra/codemotion-talks.png)
+<a href="codemotion-talks.html">
+  <img src="./img/sombra/codemotion-talks.png" alt="Resultado"/>
+</a>
 
 Sois libres de forkear y modificar este proyecto a vuestro gusto :-)
