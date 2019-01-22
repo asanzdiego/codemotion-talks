@@ -91,7 +91,7 @@ async function formatTalk(page, talkUrl) {
   }
   
   try {
-    const twitter = await page.$eval('a.linkedin', element => element.href);
+    const twitter = await page.$eval('a.twitter', element => element.href);
     html += '<p><strong>Twitter: </strong><a href="'+twitter+'">'+twitter+'</a></p>\n';
   } catch (error) {
     console.log(speakerName + ' no twitter');
