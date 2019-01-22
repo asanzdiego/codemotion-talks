@@ -36,11 +36,12 @@ async function formatTalks(page, talksUrls) {
     +'<title>Codemotion Madrid 2018 Talks</title>\n'
     +'</head>\n'
     +'<body>\n'
-    +'<h1>Codemotion Madrid 2018 Talks</h1>\n'
+    +'<h1>Codemotion Madrid 2018 Talks</h1>\n';
   for (let index = 0; index < talksUrls.length; index++) {
     const talkUrl = talksUrls[index];
     html += await formatTalk(page, talkUrl);
   }
+  //html += await formatTalk(page, 'https://madrid2018.codemotionworld.com/speaker/4294/');
   return html;
 }
 
@@ -58,32 +59,82 @@ async function login(page) {
 
 async function formatTalk(page, talkUrl) {
 
+  let html = '\n<hr />\n';
+
   await page.goto(talkUrl);
-  const speaker = await page.$eval('#speaker h1', element => element.innerText);
+
+  const speakerImg = await page.$eval('#speaker img', element => element.src);
+  html += '<img width="200" src="'+speakerImg+'"/>\n';
+
+  const speakerName = await page.$eval('#speaker h1', element => element.innerText);
+  html += '<h2>'+speakerName+'</h2>\n';
+  console.log(speakerName);
+
+  const speakerDesc = await page.$eval('#speaker h2', element => element.innerText);
+  html += '<p><strong>'+speakerDesc+'</strong></p>\n';
+
+  const speakerBio = await page.$eval('#speaker p', element => element.innerText);
+  html += '<p>'+speakerBio+'</p>\n';
   
+  try {
+    const website = await page.$eval('a.website', element => element.href);
+    html += '<p><strong>Website: </strong><a href="'+website+'">'+website+'</a></p>\n';
+  } catch (error) {
+    console.log(speakerName + ' no website');
+  }
+  
+  try {
+    const linkedin = await page.$eval('a.linkedin', element => element.href);
+    html += '<p><strong>Linkedin: </strong><a href="'+linkedin+'">'+linkedin+'</a></p>\n';
+  } catch (error) {
+    console.log(speakerName + ' no linkedin');
+  }
+  
+  try {
+    const twitter = await page.$eval('a.linkedin', element => element.href);
+    html += '<p><strong>Twitter: </strong><a href="'+twitter+'">'+twitter+'</a></p>\n';
+  } catch (error) {
+    console.log(speakerName + ' no twitter');
+  }
+
   try {
 
     const headers = await page.$$eval('.sp-wrapper-talk h3', elements => { 
       return elements.map(element => element.innerText);
     })
+    
     const talk = headers[0];
+    html += '<h3>'+talk+'</h3>\n';
+
     const language = headers[1];
+    html += '<p><strong>'+language+'</strong></p>\n';
+
     const level = headers[2];
+    html += '<p><strong>'+level+'</strong></p>\n';
+
     const abstract = await page.$eval('.sp-abstract-talk', element => element.innerText);
-    const urlVideo = await page.$eval('#video-embed', element => element.src);
-    const html = '<h2>'+speaker+'</h2>\n'
-      +'<a href="'+urlVideo.replace('embed/', 'watch?v=')+'">'+talk+'</a>\n'
-      +'<p>'+abstract+'</p>\n'
-      +'<p><strong>'+language+'</strong></p>\n'
-      +'<p><strong>'+level+'</strong></p>\n';
-    console.log(speaker+' | '+talk);
-    return html;
+    html += '<p>'+abstract+'</p>\n';
+
+    try {
+      const video = await page.$eval('#video-embed', element => element.src);
+      html += '<p><strong>Vídeo: </strong><a href="'+video+'">'+video+'</a></p>\n';
+    } catch (error) {
+      console.log(speakerName + ' no video');
+    }
+
+    try {
+      const slides = await page.$eval('.sp-box-slides iframe', element => element.src);
+      html += '<p><strong>Slides: </strong><a href="'+slides+'">'+slides+'</a></p>\n';
+    } catch (error) {
+      console.log(speakerName + ' no slides');
+    }
       
   } catch (error) {
-    
-    console.log(speaker+' | no talk');
+    console.log(speakerName+' no talk');
     return '';
   }
+
+  return html;
 }
 
 async function saveToFile(html) {
